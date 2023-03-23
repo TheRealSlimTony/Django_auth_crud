@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<main class="container py-5">
+
+    <div class="row">
+     <div class="col-md-4 offset-md-4" >
+        <form action="/signup/" method="POST" class="card card-body ">
+            <h1 class="text-center">Signup</h1>
+            {{error}}
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control"
+                placeholder="Write your username">
+            </div>
+            <div class="mb-3">
+                <label for="password">Password:</label>
+                <input type="password" name="password1" id="password1" class="form-control"
+                placeholder="Write your password">
+            </div>
+            <div class="mb-3">
+                <label for="password">Confirm your password:</label>
+                <input type="password" name="password2" id="password2" class="form-control"
+                placeholder="confirm your password">
+            </div>
+            <div class="div py-4"><button class="btn btn-primary">Create</button></div>
+            
+
+        </form>
+     </div>
+
+    </div>
+
+</main>
+
+
+
+{%endblock%}
