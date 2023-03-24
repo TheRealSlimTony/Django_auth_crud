@@ -2,19 +2,65 @@
 
 {%block content%}
 
-<main class="container py-5">
-    <section class="card card-body">
 
-        <H1 class="display-1 text-center">Django</H1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eius quia cupiditate suscipit quibusdam iure ut dolorem pariatur error incidunt, ea alias earum atque officia natus, illo, commodi veritatis expedita sunt corrupti! Ipsam commodi, ea nisi molestias quod consectetur beatae excepturi veritatis, molestiae perspiciatis porro aperiam consequuntur quasi expedita, aut odio! Aspernatur facilis cupiditate fuga. Similique praesentium harum quo, earum perferendis minima ipsum accusamus, adipisci odit amet rerum aperiam enim dolorum iusto sint quisquam molestias et tenetur. Ab itaque earum expedita aliquam optio cum? Fugiat quos omnis expedita, tempora, accusamus sequi eos, dignissimos nostrum labore ipsum similique modi illo error.</p>
-    
-        
-      <div class="text-center">
-        <a class="btn btn-primary" href="/signin/">Signin</a>
-        <a class="btn btn-primary" href="/signup/">Signup</a>
+<main class="container py-5"
+  style="background-image: url('/static/img/bg.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
+  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
+
+    <H1 class="display-1 text-center">TOPIC</H1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eius quia cupiditate suscipit quibusdam iure
+      ut dolorem pariatur error incidunt, ea alias earum atque officia natus, illo, commodi veritatis expedita sunt
+      corrupti! Ipsam commodi, ea nisi molestias quod consectetur beatae excepturi veritatis, molestiae perspiciatis
+      porro aperiam consequuntur quasi expedita, aut odio! Aspernatur facilis cupiditate fuga. Similique praesentium
+      harum quo, earum perferendis minima ipsum accusamus, adipisci odit amet rerum aperiam enim dolorum iusto sint
+      quisquam molestias et tenetur. Ab itaque earum expedita aliquam optio cum? Fugiat quos omnis expedita, tempora,
+      accusamus sequi eos, dignissimos nostrum labore ipsum similique modi illo error.</p>
+
+
+    <div class="text-center">
+      <a class="btn btn-primary" href="/signin/">Signin</a>
+      <a class="btn btn-primary" href="/signup/">Signup</a>
+    </div>
+
+  </section>
+
+  <div class="row w-100 d-none d-lg-flex">
+    <div class="col-lg-6 my-4">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.3478235615294!2d-84.17230458520588!3d9.988100192859402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fb3effd3ff31%3A0xb0d02fc62e8291b0!2sExperian%20Costa%20Rica!5e0!3m2!1sen!2scr!4v1679616538169!5m2!1sen!2scr"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </div>
+    <div class="col-lg-6 my-4 d-flex align-items-center" style="background-color: rgba(255, 255, 255, 0.3);">
+      <div>
+        <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quidem saepe voluptates vitae, nemo consequatur
+          ipsam voluptate harum laboriosam. Quos!</h6>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate odit hic aperiam libero eveniet inventore
+          aut qui ipsa, quas asperiores!</p>
+        <p>This useful feature helps to make your embedded map responsive (<strong>mobile
+            friendly</strong>). You can customize responsive behavior with the use of <a
+            href="https://mdbootstrap.com/docs/standard/layout/breakpoints/">breakpoints</a>.</p>
+        <p>This text looks so nice because it's <strong>vertically centered</strong> you can achieve
+          this effect using the <a href="https://mdbootstrap.com/docs/standard/layout/vertical-alignment/">vertical
+            alignment</a> layout option.</p>
+
+
+        <p style="color: black; font-size: inherit;">This is a black paragraph with the base font size.</p>
+
+
       </div>
-    
-    </section>
+    </div>
+  </div>
+
+
+  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
+    <div>
+      <h5>Randon Fact</h5>
+      <p>{{fact}}</p>
+    </div>
+  </section>
+
 
 
 </main>

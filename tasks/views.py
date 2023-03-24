@@ -8,12 +8,32 @@ from .models import Task
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+import requests as ri
 
+import asyncio
+import httpx
 
-def home(request):
-    return render(request, 'home.html')
+async def fetch_facts(api_key, limit):
+    headers = {'X-Api-Key': api_key}
+    url = f'https://api.api-ninjas.com/v1/facts?limit={limit}'
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, headers=headers, timeout=10.0)
+    if response.status_code == httpx.codes.ok:
+        fact = response.json()[0]['fact']
+    else:
+        fact = 'Error fetching fact'
+    return fact
 
+async def home(request):
+    api_key = 'v6thHnV+uQHj1bIVxSvv3w==km3pAo6anq2N1iPi'
+    limit = 1
+    fact = await fetch_facts(api_key, limit)
+    print(request.method)
 
+    if fact == "Error fetching fact":
+        fact = "Por favor saquenme de latam"
+
+    return render(request, 'home.html', {'fact': fact})
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html', {

@@ -1,11 +1,11 @@
 {%extends 'base.html'%}
 {%block content%}
 
-<main class="container py-5">
 
+<main class="container py-5" style="background-image: url('/static/img/bg.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
     <div class="row">
      <div class="col-md-4 offset-md-4" >
-        <form action="/signup/" method="POST" class="card card-body ">
+        <form action="/signup/" method="POST" class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
             <h1 class="text-center">Signup</h1>
             {{error}}
             {% csrf_token %}
@@ -25,8 +25,6 @@
                 placeholder="confirm your password">
             </div>
             <div class="div py-4"><button class="btn btn-primary">Create</button></div>
-            
-
         </form>
      </div>
 
