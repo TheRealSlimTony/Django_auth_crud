@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Snippets</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ml-md-3">
+            <ul class="list-group">
+                {%for task in tasks%}
+                <a class="list-group-item">
+                    <header class="d-flex justify-content-between">
+                        <h1>{{task.title}}</h1>
+                        <p>{{task.user.username}}</p>
+                    </header>
+                    <p>{{task.descripcion}}</p>
+                    <P>{{task.datecompleted|date:'M j Y:i'}}</P>
+                </a>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+</main>
+
+
+{%endblock%}

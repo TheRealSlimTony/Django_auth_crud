@@ -12,8 +12,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from asgiref.sync import sync_to_async
 
-from .forms import TaskForm
-from .models import Task
+from .forms import TaskForm 
+from .models import Task, Snippet
 
 
 async def fetch_facts(api_key, limit):
@@ -69,6 +69,9 @@ def signup(request):
 @login_required
 def tasks(request):
     tasks = Task.objects.filter(user=request.user, datecompleted__isnull=True)
+    snippets = Snippet.objects.all()
+    print(tasks,snippets)
+    
     return render(request, 'tasks.html', {
         'tasks': tasks
     })
@@ -76,7 +79,7 @@ def tasks(request):
 @login_required
 def tasks_completed(request):
     tasks = Task.objects.filter(
-        user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+        user = request.user, datecompleted__isnull=False).order_by('-datecompleted')
     return render(request, 'tasks.html', {
         'tasks': tasks
     })
@@ -168,3 +171,30 @@ def delete_task(request, task_id):
     if request.method == 'POST':
         task.delete()
         return redirect('tasks')
+
+@login_required
+def snippet(request):
+    if request.method == 'GET':
+        print('es un get')
+        return render(request,'snippet.html')
+    
+    else:
+        if request.method == 'POST':
+            title = request.POST['title']
+            tag = request.POST['tag']
+            snippet = request.POST['snippet']
+            print(title,tag,snippet,request.user)
+            snippet = Snippet(title=title,language=tag, descripcion = snippet,user=request.user)
+            snippet.save()
+            return render(request,'snippet.html')
+
+
+
+def snippets(request):
+   
+    snippets = Snippet.objects.all()
+    print(snippets)
+    
+    return render(request, 'snippets.html', {
+        'tasks': snippets
+    })

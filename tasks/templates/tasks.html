@@ -9,7 +9,6 @@
             <ul class="list-group">
                 {%for task in tasks%}
                 <a class="list-group-item" href="{%url 'task_detail' task.id %}">
-
                     <header class="d-flex justify-content-between">
                         <h1>{{task.title}}</h1>
                         <p>{{task.user.username}}</p>
