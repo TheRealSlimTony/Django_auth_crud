@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import GameSession,Card,vote,Participant
 from .forms import JoinGameForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg
 # Create your views here.
 import re
 
@@ -39,8 +40,8 @@ def card_selection(request, game_session_id,user_id):
     participants = Participant.objects.filter(game_session=game_session)
     form = JoinGameForm()
 
-    if request.method == 'POST':
-        print('***********************************************esto es el post',request.POST)
+    if request.method == 'POST' and request.POST['card'] != 'Clear':
+        print('*********************esto es el post**********************\n',request.POST)
         id = request.POST['user_id']
         card = request.POST['card']
         session_id = request.POST['session_id']
@@ -50,11 +51,9 @@ def card_selection(request, game_session_id,user_id):
         print('este es el id: ',id)
         print('este es el puntaje votado: ',card)
         print('este es el session id:',session_id)
-
         participant = Participant.objects.filter(id=id).first()
         print(participant.name)
         participant_name = participant.name
-
         participant, created = Participant.objects.get_or_create(
             name=participant_name,
             game_session=game_session,
@@ -63,33 +62,35 @@ def card_selection(request, game_session_id,user_id):
                 'point': int(card)
             }
         )
-
         if not created:
-            # Participant already exists, update its attributes
             participant.voted = True
             participant.point = int(card)
             participant.save()
 
-
-        print('********************************* es valido *********************************')
-
+        score = Participant.objects.filter(game_session=session_id).aggregate(Avg('point'))['point__avg']
+        print('el avg point es :',score)
         return render(request, 'card_selection.html', {
-                # 'game_session': game_session,
-                # 'form': form,
                 'participants': participants,
-                # 'voto':'hey'
                 'user_id':user_id,
-                'session_id':"http://127.0.0.1:8000/pointing/join_session/{}/".format(game_session_id)
+                'session_id':"http://127.0.0.1:8000/pointing/join_session/{}/".format(game_session_id),
+                'score':score
             })
+    elif request.method == 'POST' and request.POST['card'] == 'Clear':
+        Participant.objects.all().update(point=0)
+        Participant.objects.all().update(voted=0)
+        return render(request,'card_selection.html',{
+            'game_session': game_session,
+            'participants': participants,
+            'user_id': user_id,
+            'session_id':"http://127.0.0.1:8000/pointing/join_session/{}/".format(game_session_id)
+        })
 
        
     elif request.method == 'GET':
           print('esto fue un get ')
           return render(request, 'card_selection.html', {
                 'game_session': game_session,
-                # 'form': form,
                 'participants': participants,
-                # 'voto':'hey'
                 'user_id':user_id,
                 'session_id':"http://127.0.0.1:8000/pointing/join_session/{}/".format(game_session_id)
             })
@@ -103,7 +104,6 @@ def join_session(request, game_session_id):
     elif request.method == 'POST':
         form = JoinGameForm(request.POST)
         if form.is_valid():
-            print('****************************************al menos es valido****************************')
             # Si el formulario es válido, crear un nuevo participante y guardar la información en la base de datos
             participant = Participant.objects.create(
                 name=form.cleaned_data['name'],
@@ -118,7 +118,6 @@ def join_session(request, game_session_id):
             return redirect('select_cards',game_session_id=game_session.id,user_id=user_id)
         
         else:
-            print('el formulario esta chueco')
             return render(request, 'join_session.html', {'form': form, 'game_session_id': game_session_id})
                
 
