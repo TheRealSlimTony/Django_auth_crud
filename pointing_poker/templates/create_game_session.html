@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block content%}
+<main class="container py-5">
+
+
+    <h1>Create a new game session</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" required><br>
+        <label for="start_time">Start time:</label>
+        <input type="datetime-local" name="start_time" required><br>
+        <button type="submit">Create</button>
+    </form>
+
+
+</main>
+
+{%endblock%}

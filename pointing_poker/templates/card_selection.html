@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<main class="container py-5">
+
+    <h2>Select a Card</h2>
+    {{session_id}}
+    {{user_id}}
+  
+    <ul>
+        {%for participant in participants%}
+            {%if participant.voted%}
+                <li>{{participant}} &#10004;&#65039; </li>
+            {%else%}
+            <li>{{participant}}&#9203;</li>
+            {%endif%}
+        {%endfor%}
+    </ul>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="card" value="0">
+        <input type="submit" name="card" value="1">
+        <input type="submit" name="card" value="2">
+        <input type="submit" name="card" value="3">
+        <input type="submit" name="card" value="5">
+        <input type="submit" name="card" value="8">
+        <input type="submit" name="card" value="13">
+        <input type="submit" name="card" value="∞">
+        <input type="submit" name="card" value="?">
+        <input type="submit" name="clear" value="Clear">
+        <input type="hidden" name="user_id" value="{{ user_id}}">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+    </form>
+
+
+
+
+</main>
+
+{%endblock%}

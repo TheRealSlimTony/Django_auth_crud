@@ -3,6 +3,7 @@ import asyncio
 import httpx
 # Create your views here.
 import requests as ri
+from asgiref.sync import sync_to_async
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -10,10 +11,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from asgiref.sync import sync_to_async
 
-from .forms import TaskForm 
-from .models import Task, Snippet
+from .forms import TaskForm
+from .models import Snippet, Task
 
 
 async def fetch_facts(api_key, limit):
@@ -66,24 +66,6 @@ def signup(request):
                 'form': UserCreationForm
             })
 
-@login_required
-def tasks(request):
-    tasks = Task.objects.filter(user=request.user, datecompleted__isnull=True)
-    snippets = Snippet.objects.all()
-    print(tasks,snippets)
-    
-    return render(request, 'tasks.html', {
-        'tasks': tasks
-    })
-
-@login_required
-def tasks_completed(request):
-    tasks = Task.objects.filter(
-        user = request.user, datecompleted__isnull=False).order_by('-datecompleted')
-    return render(request, 'tasks.html', {
-        'tasks': tasks
-    })
-
 def signout(request):
     logout(request)
     return redirect('home')
@@ -110,6 +92,33 @@ def signin(request):
                 print(user)
                 print(type(user))
                 return redirect('home')
+
+def snippets(request):
+   
+    snippets = Snippet.objects.all()
+    print(snippets)
+    
+    return render(request, 'snippets.html', {
+        'tasks': snippets
+    })
+
+@login_required
+def tasks(request):
+    tasks = Task.objects.filter(user=request.user, datecompleted__isnull=True)
+    snippets = Snippet.objects.all()
+    print(tasks,snippets)
+    
+    return render(request, 'tasks.html', {
+        'tasks': tasks
+    })
+
+@login_required
+def tasks_completed(request):
+    tasks = Task.objects.filter(
+        user = request.user, datecompleted__isnull=False).order_by('-datecompleted')
+    return render(request, 'tasks.html', {
+        'tasks': tasks
+    })
 
 @login_required
 def create_task(request):
@@ -189,12 +198,3 @@ def snippet(request):
             return render(request,'snippet.html')
 
 
-
-def snippets(request):
-   
-    snippets = Snippet.objects.all()
-    print(snippets)
-    
-    return render(request, 'snippets.html', {
-        'tasks': snippets
-    })
