@@ -3,14 +3,13 @@ from .models import GameSession,Card,vote,Participant
 from .forms import JoinGameForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
-# Create your views here.
 import re
+
 
 def game_session_list(request):
     game_sessions = GameSession.objects.all()
     context = {'context':game_sessions}
     return render(request, 'pointing.html', context)
-
 
 def create_game_session(request):
 
@@ -29,7 +28,6 @@ def create_game_session(request):
         if request.method == 'GET':
             print('**********************GET***************************')
             return render(request,'create_game_session.html')
-
 
 def card_selection(request, game_session_id,user_id):
     game_session = get_object_or_404(GameSession, id=game_session_id)
@@ -94,7 +92,6 @@ def card_selection(request, game_session_id,user_id):
                 'user_id':user_id,
                 'session_id':"http://127.0.0.1:8000/pointing/join_session/{}/".format(game_session_id)
             })
-
 
 def join_session(request, game_session_id):
     game_session = get_object_or_404(GameSession, id=game_session_id)
