@@ -75,17 +75,22 @@ def get_messages(request,room):
     return JsonResponse({"messages":list(messages.values())})
 
 def create_qr(request):
-
+    print(request.POST)
+    
     if request.method == 'POST':
-        print(request.POST['QR_Request'])
-        qr_code_name_requested = request.POST['QR_Request']
-        path_name = qr_creation(qr_code_name_requested)
+        if 'Send' in request.POST:
+            print(request.POST['QR_Request'])
+            qr_code_name_requested = request.POST['QR_Request']
+            path_name = qr_creation(qr_code_name_requested)
 
-
-        return render(request,'create_qr.html',{
-            'qr_code_name_requested':qr_code_name_requested,
-            'path_name':path_name
-        })
+            return render(request,'create_qr.html',{
+                'qr_code_name_requested':qr_code_name_requested,
+                'path_name':path_name
+            })
+        elif 'Delete' in request.POST:
+            for file in os.listdir("static\img\QRs"):
+                os.remove(os.path.join("static\img\QRs", file))
+                print(file)
 
 
     return render(request,'create_qr.html')
@@ -113,5 +118,4 @@ def qr_creation(qr_code_requested):
     time_string = current_time.strftime('%Y%m%d_%H%M%S')
     path = os.path.join("static", "img", "QRs", "QR_code_{}.png".format(time_string)).replace("\\","/")
     img.save(path)
-    print(path)
     return path
