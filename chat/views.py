@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Room, Message
 
 from django.http import HttpResponse,JsonResponse
+import qrcode
 
 # Create your views here.
 
@@ -70,3 +71,40 @@ def get_messages(request,room):
     messages = Message.objects.filter(room=room_details.id)
     print(messages)
     return JsonResponse({"messages":list(messages.values())})
+
+def create_qr(request):
+
+    if request.method == 'POST':
+        print(request.POST['QR_Request'])
+        qr_code_name_requested = request.POST['QR_Request']
+        qr_creation(qr_code_name_requested)
+
+        return render(request,'create_qr.html',{
+            'qr_code_name_requested':qr_code_name_requested
+        })
+
+
+    return render(request,'create_qr.html')
+
+
+def qr_creation(qr_code_requested):
+    # create a QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    # add data to the QR code
+    qr.add_data(qr_code_requested)
+
+    # compile the QR code
+    qr.make(fit=True)
+
+    # create an image from the QR code
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # save the image
+    img.save(r"C:\Users\Its Tony Again PC\Documents\GitHub\Django_auth\static\img\QRs\QRsexample.png")
+
+    

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+
+
+    <h1>QR CODE Creation</h1>
+    <p>Did you know that QR stands for 'Quick Response'?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input name="QR_Request" id="QR" placeholder="What do you want to QR?"/>
+        <input type="submit" value="Send">
+    </form>
+    
+    <img src="/static/img/QRs/QRsexample.png" alt="QR Code" class="py-5">
+
+    <p>This is your QR of '{{qr_code_name_requested}}' </p>
+
+</main>
+
+
+
+{% endblock %}
