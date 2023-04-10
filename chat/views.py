@@ -105,6 +105,7 @@ def qr_creation(qr_code_requested):
     img = qr.make_image(fill_color="black", back_color="white")
 
     # save the image
-    img.save(r"C:\Users\Its Tony Again PC\Documents\GitHub\Django_auth\static\img\QRs\QRsexample.png")
+    img.save(r"static\img\QRs\QR_code.png")
+    print('se ha guardado imagen')
 
     
