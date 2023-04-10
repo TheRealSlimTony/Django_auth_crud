@@ -1,8 +1,10 @@
+import os
 from django.shortcuts import render, redirect
 from .models import Room, Message
 
 from django.http import HttpResponse,JsonResponse
 import qrcode
+import datetime
 
 # Create your views here.
 
@@ -77,10 +79,12 @@ def create_qr(request):
     if request.method == 'POST':
         print(request.POST['QR_Request'])
         qr_code_name_requested = request.POST['QR_Request']
-        qr_creation(qr_code_name_requested)
+        path_name = qr_creation(qr_code_name_requested)
+
 
         return render(request,'create_qr.html',{
-            'qr_code_name_requested':qr_code_name_requested
+            'qr_code_name_requested':qr_code_name_requested,
+            'path_name':path_name
         })
 
 
@@ -105,7 +109,9 @@ def qr_creation(qr_code_requested):
     img = qr.make_image(fill_color="black", back_color="white")
 
     # save the image
-    img.save(r"static\img\QRs\QR_code.png")
-    print('se ha guardado imagen')
-
-    
+    current_time = datetime.datetime.now()
+    time_string = current_time.strftime('%Y%m%d_%H%M%S')
+    path = os.path.join("static", "img", "QRs", "QR_code_{}.png".format(time_string)).replace("\\","/")
+    img.save(path)
+    print(path)
+    return path

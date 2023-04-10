@@ -13,13 +13,15 @@
         <input name="QR_Request" id="QR" placeholder="What do you want to QR?"/>
         <input type="submit" value="Send">
     </form>
-    
-    <img src="/static/img/QRs/QR_code.png" alt="QR Code" class="py-5">
+    {% load static %}
+    <!-- <img src="{% static 'img/QRs/QR_code.png' %}" alt="QR Code" class="py-5"> -->
+    <img src="/{{ path_name }}" alt="QR Code" class="py-5">
 
     <p>This is your QR of '{{qr_code_name_requested}}' </p>
 
 </main>
 
+{{path_name}}
 
 
 {% endblock %}
