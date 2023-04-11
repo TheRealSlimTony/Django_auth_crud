@@ -77,20 +77,21 @@ def get_messages(request,room):
 def create_qr(request):
     # print(request.POST)
     
-    # if request.method == 'POST':
-    #     if 'Send' in request.POST:
-    #         print(request.POST['QR_Request'])
-    #         qr_code_name_requested = request.POST['QR_Request']
-    #         path_name = qr_creation(qr_code_name_requested)
+    if request.method == 'POST':
+        if 'Send' in request.POST:
+            print(request.POST['QR_Request'])
+            qr_code_name_requested = request.POST['QR_Request']
+            # path_name = qr_creation(qr_code_name_requested)
 
-    #         return render(request,'create_qr.html',{
-    #             'qr_code_name_requested':qr_code_name_requested,
-    #             'path_name':path_name
-    #         })
-        # elif 'Delete' in request.POST:
-        #     for file in os.listdir("static\img\QRs"):
-        #         os.remove(os.path.join("static\img\QRs", file))
-        #         print(file)
+            return render(request,'create_qr.html',{
+                'qr_code_name_requested':qr_code_name_requested
+                # 'path_name':path_name
+            })
+        elif 'Delete' in request.POST:
+            # for file in os.listdir("static\img\QRs"):
+            #     os.remove(os.path.join("static\img\QRs", file))
+            #     print(file)
+            pass
 
 
     return render(request,'create_qr.html')
