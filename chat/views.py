@@ -93,9 +93,7 @@ def create_qr(request):
         #         print(file)
 
 
-    return render(request,'create_qr.html',{
-        'x':13
-    })
+    return render(request,'create_qr.html')
 
 
 def qr_creation(qr_code_requested):
