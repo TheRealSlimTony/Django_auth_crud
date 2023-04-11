@@ -81,11 +81,11 @@ def create_qr(request):
         if 'Send' in request.POST:
             print(request.POST['QR_Request'])
             qr_code_name_requested = request.POST['QR_Request']
-            # path_name = qr_creation(qr_code_name_requested)
+            path_name = qr_creation(qr_code_name_requested)
 
             return render(request,'create_qr.html',{
-                'qr_code_name_requested':qr_code_name_requested
-                # 'path_name':path_name
+                'qr_code_name_requested':qr_code_name_requested,
+                'path_name':path_name
             })
         elif 'Delete' in request.POST:
             # for file in os.listdir("static\img\QRs"):
