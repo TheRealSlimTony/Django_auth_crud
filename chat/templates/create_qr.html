@@ -17,9 +17,10 @@
 
 
 
-    <img src="/{{ path_name }}" alt="QR Code" class="py-5"
-        onerror="this.onerror=null; this.src='/static/img/QRs_on_error/default_qr.png';">
-    <p>the QR name you requested {{qr_code_name_requested}} and this could be the path '{{path_name}}'</p>
+    <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" class="py-5"
+    onerror="this.onerror=null; this.src='/static/img/QRs_on_error/default_qr.png';">
+
+    <p>the QR name you requested {{qr_code_name_requested}}</p>
 
 
 </main>

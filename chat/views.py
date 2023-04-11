@@ -5,6 +5,7 @@ from .models import Room, Message
 from django.http import HttpResponse,JsonResponse
 import qrcode
 import datetime
+import base64
 
 # Create your views here.
 
@@ -81,11 +82,12 @@ def create_qr(request):
         if 'Send' in request.POST:
             print(request.POST['QR_Request'])
             qr_code_name_requested = request.POST['QR_Request']
-            path_name = qr_creation(qr_code_name_requested)
+            response = qr_creation(qr_code_name_requested)
+            image_data = base64.b64encode(response.content).decode("utf-8")
 
             return render(request,'create_qr.html',{
                 'qr_code_name_requested':qr_code_name_requested,
-                'path_name':path_name
+                'qr_image': image_data
             })
         elif 'Delete' in request.POST:
             for file in os.listdir("static\img\QRs"):
@@ -95,6 +97,7 @@ def create_qr(request):
 
 
     return render(request,'create_qr.html')
+
 
 
 def qr_creation(qr_code_requested):
@@ -115,8 +118,12 @@ def qr_creation(qr_code_requested):
     img = qr.make_image(fill_color="black", back_color="white")
 
     # save the image
-    current_time = datetime.datetime.now()
-    time_string = current_time.strftime('%Y%m%d_%H%M%S')
-    path = os.path.join("static", "img", "QRs", "QR_code_{}.png".format(time_string)).replace("\\","/")
-    img.save(path)
-    return path
+    # current_time = datetime.datetime.now()
+    # time_string = current_time.strftime('%Y%m%d_%H%M%S')
+    # path = os.path.join("static", "img", "QRs", "QR_code_{}.png".format(time_string)).replace("\\","/")
+    # img.save(path)
+
+    response = HttpResponse(content_type='image/png')
+    img.save(response, 'PNG')
+
+    return response
