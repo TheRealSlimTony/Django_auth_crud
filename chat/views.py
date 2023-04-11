@@ -88,9 +88,9 @@ def create_qr(request):
                 'path_name':path_name
             })
         elif 'Delete' in request.POST:
-            # for file in os.listdir("static\img\QRs"):
-            #     os.remove(os.path.join("static\img\QRs", file))
-            #     print(file)
+            for file in os.listdir("static\img\QRs"):
+                os.remove(os.path.join("static\img\QRs", file))
+                print(file)
             pass
 
 
