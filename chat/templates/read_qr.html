@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5"
+  style="background-image: url('/static/img/bg2.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
+
+  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
+    <h1>QR CODE Reader</h1>
+    <p>Did you know that QR stands for 'Quick Response'?</p>
+    <p>how much information can i put on a QR?</p>
+    <p>The amount of information that can be encoded in a QR code depends on the version of the QR code, which
+        determines the size and the number of modules (black and white squares) in the code. The more modules a QR code
+        has, the more information it can encode.</p>
+
+    <p>The number of modules in a QR code ranges from 21 x 21 (version 1) to 177 x 177 (version 40). The amount of
+        information that can be encoded in a QR code is measured in characters, and it varies depending on the type of
+        data being encoded (numeric, alphanumeric, binary, or kanji characters).</p>
+
+    <p>For example, a QR code version 10 (57 x 57 modules) can encode up to:</p>
+    <ul>
+        <li>7,089 numeric characters</li>
+        <li>4,296 alphanumeric characters</li>
+        <li>2,953 binary (8-bit) bytes</li>
+        <li>1,817 kanji characters</li>
+    </ul>
+
+    <p>A QR code version 40 (177 x 177 modules) can encode up to:</p>
+    <ul>
+        <li>1852 numeric characters</li>
+        <li>1,109 alphanumeric characters</li>
+        <li>7098 binary (8-bit) bytes</li>
+        <li>4,296 kanji characters</li>
+    </ul>
+
+    <p>Keep in mind that the more information you encode, the denser and more complex the QR code will be, which may
+        affect its readability and scanning performance.</p>
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="qr-code">Upload QR code:</label>
+        <input type="file" name="qr-code">
+        <button type="submit">Upload</button>
+    </form>
+
+
+    <p>The QR decoded is: '{{qr_code_name_requested}}'</p>
+</section>
+</main>
+
+
+
+{% endblock %}

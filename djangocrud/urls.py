@@ -41,6 +41,7 @@ urlpatterns = [
     path('chat/home/room/<str:room_name>/', chatviews.room, name='room'),
     path('chat/home/check_view/', chatviews.check_view, name='check_view'),
     path('chat/home/create_qr/', chatviews.create_qr, name='create_qr'),
+    path('chat/home/read_qr/', chatviews.read_qr, name='create_qr'),
     path('send/', chatviews.send, name='send'),
     path('getMessages/<str:room>/', chatviews.get_messages, name='get_messages')
 

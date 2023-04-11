@@ -2,10 +2,12 @@ import os
 from django.shortcuts import render, redirect
 from .models import Room, Message
 
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse, JsonResponse
 import qrcode
 import datetime
 import base64
+from pyzbar.pyzbar import decode 
+from PIL import Image
 
 # Create your views here.
 
@@ -14,37 +16,38 @@ def home(request):
     # print(request.POST)
     # if request.method == 'POST':
 
-        # room_name = request.POST['room_name']
-        # username = request.POST['username']
-        # print(room_name, username)
-        # Room.objects.create(room_name)
+    # room_name = request.POST['room_name']
+    # username = request.POST['username']
+    # print(room_name, username)
+    # Room.objects.create(room_name)
     #     return render(request, 'home_chat.html')
 
     # else:
     #     if request.method == 'GET':
     #         return render(request, 'home_chat.html')
-    return render(request,'home_chat.html')
+    return render(request, 'home_chat.html')
 
 
-def room(request,room_name):
+def room(request, room_name):
 
     username = request.GET.get('username')
-    
+
     room_details = Room.objects.get(name=room_name)
-    print('++++++++++++++++',username,room_details)
+    print('++++++++++++++++', username, room_details)
     if request.method == 'POST':
-        return render(request, 'room.html',{
-            'room':room_name,
-            'username':username,
-            'room_details':room_details
+        return render(request, 'room.html', {
+            'room': room_name,
+            'username': username,
+            'room_details': room_details
         })
     else:
         if request.method == 'GET':
-            return render(request, 'room.html',{
-            'room':room_name,
-            'username':username,
-            'room_details':room_details
-        })
+            return render(request, 'room.html', {
+                'room': room_name,
+                'username': username,
+                'room_details': room_details
+            })
+
 
 def check_view(request):
 
@@ -65,19 +68,20 @@ def send(request):
     username = request.POST['username']
     # print('******************************',request.POST)
 
-    message = Message.objects.create(user=username,room=room,value=message)
+    message = Message.objects.create(user=username, room=room, value=message)
     message.save()
     return HttpResponse('Message send')
 
-def get_messages(request,room):
-    room_details =  Room.objects.get(name=room)
+
+def get_messages(request, room):
+    room_details = Room.objects.get(name=room)
     messages = Message.objects.filter(room=room_details.id)
     print(messages)
-    return JsonResponse({"messages":list(messages.values())})
+    return JsonResponse({"messages": list(messages.values())})
+
 
 def create_qr(request):
-    # print(request.POST)
-    
+
     if request.method == 'POST':
         if 'Send' in request.POST:
             print(request.POST['QR_Request'])
@@ -85,19 +89,12 @@ def create_qr(request):
             response = qr_creation(qr_code_name_requested)
             image_data = base64.b64encode(response.content).decode("utf-8")
 
-            return render(request,'create_qr.html',{
-                'qr_code_name_requested':qr_code_name_requested,
+            return render(request, 'create_qr.html', {
+                'qr_code_name_requested': qr_code_name_requested,
                 'qr_image': image_data
             })
-        elif 'Delete' in request.POST:
-            for file in os.listdir("static\img\QRs"):
-                os.remove(os.path.join("static\img\QRs", file))
-                print(file)
-            pass
 
-
-    return render(request,'create_qr.html')
-
+    return render(request, 'create_qr.html')
 
 
 def qr_creation(qr_code_requested):
@@ -117,13 +114,26 @@ def qr_creation(qr_code_requested):
     # create an image from the QR code
     img = qr.make_image(fill_color="black", back_color="white")
 
-    # save the image
-    # current_time = datetime.datetime.now()
-    # time_string = current_time.strftime('%Y%m%d_%H%M%S')
-    # path = os.path.join("static", "img", "QRs", "QR_code_{}.png".format(time_string)).replace("\\","/")
-    # img.save(path)
-
     response = HttpResponse(content_type='image/png')
     img.save(response, 'PNG')
 
     return response
+
+
+def read_qr(request):
+
+    if request.method == 'POST':
+        qr_file = request.FILES['qr-code']
+        qr_image = Image.open(qr_file)
+        qr_codes = decode(qr_image)
+        for qr_code in qr_codes:
+             print(qr_code.data.decode('utf-8'))
+             x = qr_code.data.decode('utf-8')
+
+
+
+        return render(request, 'read_qr.html',{
+            'qr_deocded': x
+        })
+
+    return render(request,'read_qr.html')

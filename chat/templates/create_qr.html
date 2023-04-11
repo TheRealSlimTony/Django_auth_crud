@@ -11,8 +11,7 @@
     <form method="POST">
         {% csrf_token %}
         <input name="QR_Request" id="QR" placeholder="What do you want to QR?" />
-        <input type="submit" value="Send" name="Send">
-        <input type="submit" value="Delete" name="Delete">
+        <input type="submit" value="Create" name="Send">
     </form>
 
 
@@ -20,8 +19,7 @@
     <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" class="py-5"
     onerror="this.onerror=null; this.src='/static/img/QRs_on_error/default_qr.png';">
 
-    <p>the QR name you requested {{qr_code_name_requested}}</p>
-
+    <p>the QR name you requested is '{{qr_code_name_requested}}'</p>
 
 </main>
 
