@@ -1,16 +1,14 @@
-import os
-from django.shortcuts import render, redirect
-from .models import Room, Message
-
-from django.http import HttpResponse, JsonResponse
-import qrcode
-import datetime
 import base64
-from pyzbar.pyzbar import decode 
+
+import qrcode
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
 from PIL import Image
+from pyzbar.pyzbar import decode
+
+from .models import Message, Room
 
 # Create your views here.
-
 
 def home(request):
     # print(request.POST)
