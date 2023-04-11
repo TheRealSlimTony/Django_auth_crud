@@ -74,28 +74,28 @@ def get_messages(request,room):
     print(messages)
     return JsonResponse({"messages":list(messages.values())})
 
-def create_qr2(request):
-    # print(request.POST)
+# def create_qr2(request):
+#     # print(request.POST)
     
-    # if request.method == 'POST':
-    #     if 'Send' in request.POST:
-    #         print(request.POST['QR_Request'])
-    #         qr_code_name_requested = request.POST['QR_Request']
-    #         path_name = qr_creation(qr_code_name_requested)
+#     # if request.method == 'POST':
+#     #     if 'Send' in request.POST:
+#     #         print(request.POST['QR_Request'])
+#     #         qr_code_name_requested = request.POST['QR_Request']
+#     #         path_name = qr_creation(qr_code_name_requested)
 
-    #         return render(request,'create_qr.html',{
-    #             'qr_code_name_requested':qr_code_name_requested,
-    #             'path_name':path_name
-    #         })
-        # elif 'Delete' in request.POST:
-        #     for file in os.listdir("static\img\QRs"):
-        #         os.remove(os.path.join("static\img\QRs", file))
-        #         print(file)
+#     #         return render(request,'create_qr.html',{
+#     #             'qr_code_name_requested':qr_code_name_requested,
+#     #             'path_name':path_name
+#     #         })
+#         # elif 'Delete' in request.POST:
+#         #     for file in os.listdir("static\img\QRs"):
+#         #         os.remove(os.path.join("static\img\QRs", file))
+#         #         print(file)
 
 
-    return render(request,'create_qr2.html',{
-        'x':13
-    })
+#     return render(request,'create_qr2.html',{
+#         'x':13
+#     })
 
 
 def qr_creation(qr_code_requested):
