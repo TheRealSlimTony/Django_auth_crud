@@ -4,7 +4,7 @@ import qrcode
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from PIL import Image
-from pyzbar.pyzbar import decode
+
 
 from .models import Message, Room
 
@@ -118,20 +118,20 @@ def qr_creation(qr_code_requested):
     return response
 
 
-def read_qr(request):
+# def read_qr(request):
 
-    if request.method == 'POST':
-        qr_file = request.FILES['qr-code']
-        qr_image = Image.open(qr_file)
-        qr_codes = decode(qr_image)
-        for qr_code in qr_codes:
-             print(qr_code.data.decode('utf-8'))
-             x = qr_code.data.decode('utf-8')
+#     if request.method == 'POST':
+#         qr_file = request.FILES['qr-code']
+#         qr_image = Image.open(qr_file)
+#         qr_codes = decode(qr_image)
+#         for qr_code in qr_codes:
+#              print(qr_code.data.decode('utf-8'))
+#              x = qr_code.data.decode('utf-8')
 
 
 
-        return render(request, 'read_qr.html',{
-            'qr_deocded': x
-        })
+#         return render(request, 'read_qr.html',{
+#             'qr_deocded': x
+#         })
 
-    return render(request,'read_qr.html')
+#     return render(request,'read_qr.html')
