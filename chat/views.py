@@ -74,7 +74,7 @@ def get_messages(request,room):
     print(messages)
     return JsonResponse({"messages":list(messages.values())})
 
-def create_qr(request):
+def create_qr2(request):
     # print(request.POST)
     
     # if request.method == 'POST':
