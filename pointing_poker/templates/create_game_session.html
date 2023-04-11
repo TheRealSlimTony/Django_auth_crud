@@ -1,11 +1,10 @@
-{%extends 'base.html'%}
-{%block content%}
-<main class="container py-5">
+{% extends 'base.html' %}
 
-
-    <h1>Create a new game session</h1>
-
-    <form method="post">
+{% block content %}
+<main
+    style="background-image: url('/static/img/bg_og.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
+    <h1 style="display: flex; flex-direction: column; gap: 1px; padding: 0 20px;">Create a new game session</h1>
+    <form method="post" style="display: flex; flex-direction: column; gap: 1px; padding: 0 20px;">
         {% csrf_token %}
         <label for="name">Name:</label>
         <input type="text" name="name" required><br>
@@ -13,10 +12,8 @@
         <input type="text" name="description" required><br>
         <label for="start_time">Start time:</label>
         <input type="datetime-local" name="start_time" required><br>
-        <button type="submit">Create</button>
+        <button type="submit"
+            style="background-color: #4caf4f98; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 10px;">Create</button>
     </form>
-
-
 </main>
-
-{%endblock%}
+{% endblock %}

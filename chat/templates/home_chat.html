@@ -2,14 +2,12 @@
 
 {% block content %}
 
-
-<main class="container py-5">
+<main
+  style="background-image: url('/static/img/bg_og.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
 
   <body>
-    <div align="center">
-      <h2>Welcome to the chat rooms</h2>
-    </div>
-    <div class="container">
+
+    <div class="content-section">
       <style>
         input[type=text],
         select {
@@ -24,7 +22,7 @@
 
         input[type=submit] {
           width: 100%;
-          background-color: #4CAF50;
+          background-color: #4caf4fab;
           color: white;
           padding: 14px 20px;
           margin: 8px 0;
@@ -42,10 +40,15 @@
           background-color: #f2f2f2;
           padding: 20px;
         }
+
+        .content-section {
+          background-color: rgba(163, 12, 174, 0.438);
+        }
       </style>
 
       <form id="post-form" method="POST" action="{% url 'check_view' %}">
         {% csrf_token %}
+        <h1>Chat</h1>
         <label>Room Name</label>
         <input type="text" name="room_name" id="room_name" width="100px" />
         <label>Username</label>
