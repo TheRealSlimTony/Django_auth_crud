@@ -1,7 +1,9 @@
 import asyncio
+import json
 
 import httpx
 # Create your views here.
+import requests
 import requests as ri
 from asgiref.sync import sync_to_async
 from django.contrib.auth import authenticate, login, logout
@@ -16,6 +18,32 @@ from .forms import TaskForm
 from .models import Snippet, Task
 
 
+async def get_ip(access_key):
+    
+    # Make a request to a third-party service to retrieve your public IP address
+    ip_response = requests.get('https://api.ipify.org')
+    ip_address = ip_response.text
+
+    # Construct the API URL with the IP address and access key
+    url = f'http://api.ipstack.com/{ip_address}?access_key={access_key}'
+
+    # Make the API request and store the response in a variable
+    response = requests.get(url)
+
+    # Check the status code of the response to ensure it was successful
+    if response.status_code == 200:
+        # If the request was successful, parse the response data as JSON
+        location_data = response.json()
+        latitud = location_data.get('latitude')
+        longitud = location_data.get('longitude')
+        ip = location_data.get('ip')
+        print(latitud,longitud,ip)
+
+        return latitud,longitud,ip
+    else:
+        # If the request was unsuccessful, raise an exception or handle the error
+        response.raise_for_status()
+
 async def fetch_facts(api_key, limit):
     headers = {'X-Api-Key': api_key}
     url = f'https://api.api-ninjas.com/v1/facts?limit={limit}'
@@ -29,17 +57,21 @@ async def fetch_facts(api_key, limit):
 
 async def home(request):
     api_key = 'v6thHnV+uQHj1bIVxSvv3w==km3pAo6anq2N1iPi'
+    access_key = '319ff57a23d820322207e54eaac9d59a'
+    x = 'AIzaSyBWMJCBePTwSIG2Q_e3nORCm68IegukHTY'
     limit = 1
     fact = ""
     fact = await fetch_facts(api_key, limit)
+    latitud,longitud,ip = await get_ip(access_key)
     print(request.method)
+    print(ip)
 
     if fact == "Error fetching fact" or fact == "":
         fact = "Por favor saquenme de latam"
     
     # wrap the render function with sync_to_async
     render_func = sync_to_async(render)
-    rendered = await render_func(request, 'home.html', {'fact': fact})
+    rendered = await render_func(request, 'home.html', {'fact': fact,'ip_info':ip,'latitud':latitud,'longitud':longitud,'x':x})
     return rendered
 
 def signup(request):

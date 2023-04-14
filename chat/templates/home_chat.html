@@ -35,18 +35,12 @@
           background-color: #45a049;
         }
 
-        div {
-          border-radius: 5px;
-          background-color: #f2f2f2;
-          padding: 20px;
-        }
-
         .content-section {
           background-color: rgba(163, 12, 174, 0.438);
         }
       </style>
 
-      <form id="post-form" method="POST" action="{% url 'check_view' %}">
+      <form id="post-form" method="POST" action="{% url 'check_view' %}" style="display: flex; flex-direction: column; gap: 1px; padding: 0 20px;">
         {% csrf_token %}
         <h1>Chat</h1>
         <label>Room Name</label>
@@ -61,7 +55,7 @@
   </body>
 
 
-
+  
 </main>
 
 

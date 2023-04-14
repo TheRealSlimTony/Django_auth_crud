@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<main 
+<main class="py-5"
   style="background-image: url('/static/img/bg2.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;_gap: 1px; padding: 0 20px;">
-
+ 
     <h1>QR CODE Creation</h1>
     <p>Did you know that QR stands for 'Quick Response'?</p>
 
     <form method="POST">
-        {% csrf_token %}
-        <input name="QR_Request" id="QR" placeholder="What do you want to QR?" />
-        <input type="submit" value="Create" name="Send">
+      {% csrf_token %}
+      <input name="QR_Request" id="QR" placeholder="What do you want to QR?" />
+      <input type="submit" value="Create" name="Send">
     </form>
 
 
 
     <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" class="py-5"
-    onerror="this.onerror=null; this.src='/static/img/QRs_on_error/default_qr.png';">
+      onerror="this.onerror=null; this.src='/static/img/QRs_on_error/default_qr.png';">
 
     <p>the QR name you requested is '{{qr_code_name_requested}}'</p>
 
