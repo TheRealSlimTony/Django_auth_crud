@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 
 import httpx
 # Create your views here.
@@ -56,13 +57,13 @@ async def fetch_facts(api_key, limit):
     return fact
 
 async def home(request):
-    api_key = 'v6thHnV+uQHj1bIVxSvv3w==km3pAo6anq2N1iPi'
-    access_key = '319ff57a23d820322207e54eaac9d59a'
+    facts_key = os.environ.get('facts_key')
+    ip_key = os.environ.get('ip_key')
     x = 'AIzaSyBWMJCBePTwSIG2Q_e3nORCm68IegukHTY'
     limit = 1
     fact = ""
-    fact = await fetch_facts(api_key, limit)
-    latitud,longitud,ip = await get_ip(access_key)
+    fact = await fetch_facts(facts_key, limit)
+    latitud,longitud,ip = await get_ip(ip_key)
     print(request.method)
     print(ip)
 
