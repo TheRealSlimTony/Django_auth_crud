@@ -3,7 +3,6 @@ import json
 import os
 
 import httpx
-# Create your views here.
 import requests
 import requests as ri
 from asgiref.sync import sync_to_async
@@ -59,20 +58,18 @@ async def fetch_facts(api_key, limit):
 async def home(request):
     facts_key = os.environ.get('facts_key')
     ip_key = os.environ.get('ip_key')
-    x = 'AIzaSyBWMJCBePTwSIG2Q_e3nORCm68IegukHTY'
+  
     limit = 1
     fact = ""
     fact = await fetch_facts(facts_key, limit)
     latitud,longitud,ip = await get_ip(ip_key)
-    print(request.method)
-    print(ip)
 
     if fact == "Error fetching fact" or fact == "":
         fact = "Por favor saquenme de latam"
     
     # wrap the render function with sync_to_async
     render_func = sync_to_async(render)
-    rendered = await render_func(request, 'home.html', {'fact': fact,'ip_info':ip,'latitud':latitud,'longitud':longitud,'x':x})
+    rendered = await render_func(request, 'home.html', {'fact': fact,'ip_info':ip,'latitud':latitud,'longitud':longitud})
     return rendered
 
 def signup(request):
