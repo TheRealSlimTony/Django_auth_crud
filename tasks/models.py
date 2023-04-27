@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 class Task(models.Model):
     title = models.CharField(max_length=201)
     descripcion = models.TextField(blank=True)
@@ -15,7 +14,6 @@ class Task(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.title,self.user)
 
-
 class Snippet(models.Model):
     title = models.CharField(max_length=201)
     descripcion = models.TextField(blank=True)
@@ -24,5 +22,4 @@ class Snippet(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.title,self.user)
-
 

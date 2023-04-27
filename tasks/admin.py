@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task
+from .models import Task, Snippet
 # Register your models here.
 
 class TaskAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Snippet)

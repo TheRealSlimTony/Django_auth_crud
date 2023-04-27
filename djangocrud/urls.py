@@ -44,5 +44,5 @@ urlpatterns = [
     path('chat/home/read_qr/', chatviews.read_qr, name='read_qr'),
     path('send/', chatviews.send, name='send'),
     path('getMessages/<str:room>/', chatviews.get_messages, name='get_messages')
-
+    
 ]
