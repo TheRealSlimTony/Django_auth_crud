@@ -58,6 +58,7 @@ async def fetch_facts(api_key, limit):
 async def home(request):
     facts_key = os.environ.get('facts_key')
     ip_key = os.environ.get('ip_key')
+    google_api_key = os.environ.get('google_api_key')
   
     limit = 1
     fact = ""
@@ -69,7 +70,7 @@ async def home(request):
     
     # wrap the render function with sync_to_async
     render_func = sync_to_async(render)
-    rendered = await render_func(request, 'home.html', {'fact': fact,'ip_info':ip,'latitud':latitud,'longitud':longitud})
+    rendered = await render_func(request, 'home.html', {'fact': fact,'ip_info':ip,'latitud':latitud,'longitud':longitud, 'google_api_key':google_api_key})
     return rendered
 
 def signup(request):
