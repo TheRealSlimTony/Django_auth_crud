@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+    <h1>Ticket Detail</h1>
+    <p>ID: {{ ticket.id }}</p>
+    <p>User: {{ ticket.user }}</p>
+    <p>Sign Off: {{ ticket.sign_off }}</p>
+    <input placeholder="Code Review: {{ ticket.code_review }}"> </input>
+
+</main> 
+
+{% endblock %}

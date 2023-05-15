@@ -1,0 +1,98 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+    .search-form input[type="text"] {
+        padding: 6px;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+
+    .search-form input[type="submit"] {
+        padding: 6px 12px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .search-form input[type="submit"]:hover {
+        background-color: #0069d9;
+    }
+</style>
+
+
+<main class="container py-5">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+
+
+
+    <h1>Service Ticket </h1>
+    <form class="search-form" action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="ID_search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Sign Off</th>
+                <th>Code Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td> <a href="{% url 'ticket_detail' ticket.id %}"> {{ticket.id }}</a> </td>
+                <td>{{ ticket.user }}</td>
+                <td>{{ ticket.sign_off }}</td>
+                <td>{{ ticket.code_review }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</main>
+
+
+{%endblock%}

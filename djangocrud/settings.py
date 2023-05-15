@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tasks',
     'pointing_poker',
-    'chat'
+    'chat',
+    'service_ticket'
 ]
 
 MIDDLEWARE = [
