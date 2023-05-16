@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<style>
+    .code-box {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+  </style>
+
+<main class="container py-5">
+    <h1>{{snippet.title}}</h1>
+    <!-- <p>ID: {{ snippet.id }}</p> -->
+    <p>Code: {{ snippet.language }}</p>
+
+    <div class="code-box">Sign Off: {{ snippet.descripcion }}</body>
+    
+</main> 
+
+
+
+{%endblock%}

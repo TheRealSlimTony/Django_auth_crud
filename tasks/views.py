@@ -229,3 +229,8 @@ def snippet(request):
             return render(request,'snippet.html')
 
 
+def snippet_detail(request,snippet_id):
+
+    snippet = get_object_or_404(Snippet,id = snippet_id)
+
+    return render(request,'snippet_detail.html',{"snippet":snippet})
