@@ -2,13 +2,51 @@
 
 {% block content %}
 
-<main class="container py-5">
-    <h1>Ticket Detail</h1>
-    <p>ID: {{ ticket.id }}</p>
-    <p>User: {{ ticket.user }}</p>
-    <p>Sign Off: {{ ticket.sign_off }}</p>
-    <input placeholder="Code Review: {{ ticket.code_review }}"> </input>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-</main> 
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<main class="container py-5">
+    <H1>Details</Details></H1>
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ ticket.user }}</td>
+            </tr>
+            <tr>
+                <th>Sign Off</th>
+                <td>{{ ticket.sign_off }}</td>
+            </tr>
+            <tr>
+                <th>Code Review</th>
+                <td>{{ ticket.code_review }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
 
 {% endblock %}

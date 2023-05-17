@@ -52,3 +52,8 @@ def detail(request,ticket_id):
     return render(request, "detail.html",{
         'ticket':ticket
     })
+
+
+def idk(request):
+
+    return render(request,"idk.html")
