@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'tasks',
     'pointing_poker',
     'chat',
-    'service_ticket'
+    'service_ticket',
 ]
 
 MIDDLEWARE = [

@@ -125,9 +125,18 @@ def signin(request):
                 return redirect('home')
 
 def snippets(request):
-   
+    
+    if request.method == 'POST':
+        print(request.POST['ID_search'])
+        ID_search = request.POST['ID_search']
+        snippets = Snippet.objects.filter(language=ID_search)
+        return render(request, 'snippets.html', {
+        'tasks': snippets
+    })
+
+
+
     snippets = Snippet.objects.all()
-    print(snippets)
     
     return render(request, 'snippets.html', {
         'tasks': snippets
@@ -227,7 +236,6 @@ def snippet(request):
             snippet = Snippet(title=title,language=tag, descripcion = snippet,user=request.user)
             snippet.save()
             return render(request,'snippet.html')
-
 
 def snippet_detail(request,snippet_id):
 

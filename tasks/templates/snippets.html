@@ -55,6 +55,11 @@
 
 <main class="container py-5">
     <h1>Snippets</h1>
+    <form class="search-form" action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="ID_search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
     <table>
         <thead>
             <tr>
