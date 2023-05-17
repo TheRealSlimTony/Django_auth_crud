@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Ticket, User
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -43,17 +44,23 @@ def create(request):
         return render(request, "create.html")
 
 
-def detail(request,ticket_id):
-
-  
+def detail(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
-    print(ticket)
+    start_date = ticket.date_created
+    end_date = ticket.last_modified
+    date_format = "%Y-%m-%d %H:%M:%S.%f%z"
+    date_format_idle = "%Y-%m-%d %H:%M:%S"
 
-    return render(request, "detail.html",{
-        'ticket':ticket
-    })
+    start_date_formatted = datetime.strptime(str(start_date), date_format)
+    start_date_formatted_datetime = start_date_formatted.replace(
+        tzinfo=None, microsecond=0
+    )
 
+    end_date_formatted = datetime.strptime(str(end_date), date_format)
+    end_date_formatted_datetime = end_date_formatted.replace(tzinfo=None, microsecond=0)
 
-def idk(request):
+    current_time = datetime.now()
 
-    return render(request,"idk.html")
+    idle_time = current_time - end_date_formatted_datetime
+
+    return render(request, "detail.html", {"ticket": ticket, "idle_time": idle_time})

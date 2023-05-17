@@ -15,7 +15,10 @@
         <input type="checkbox" id="sign_off" name="sign_off"><br><br>
         <label for="code_review">Code Review:</label>
         <input type="text" id="code_review" name="code_review"><br><br>
-        <button type="submit">Create</button>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+
+        <a href="{% url 'ticket_home'%}" class="btn btn-primary">Tickets</a>
     </form>
     {% endblock %}
 </main>

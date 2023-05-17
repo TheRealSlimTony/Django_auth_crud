@@ -8,6 +8,14 @@
         border-collapse: collapse;
     }
 
+    .not-signed-off {
+        color: rgb(224, 46, 46);
+    }
+
+    .signed-off {
+        color: rgb(28, 243, 64);
+    }
+
     th,
     td {
         padding: 8px;
@@ -22,14 +30,21 @@
     tr:nth-child(even) {
         background-color: #f9f9f9;
     }
+
+    .btn_back{
+        padding: auto;
+        margin-top: 20px;
+    }
+
 </style>
 
 <main class="container py-5">
-    <H1>Details</Details></H1>
+    <H1>Details</Details>
+    </H1>
     <table>
         <tbody>
             <tr>
-                <th>ID</th>
+                <th>Ticket ID</th>
                 <td>{{ ticket.id }}</td>
             </tr>
             <tr>
@@ -38,15 +53,33 @@
             </tr>
             <tr>
                 <th>Sign Off</th>
-                <td>{{ ticket.sign_off }}</td>
+                {% if ticket.sign_off %}
+                <td class="signed-off">{{ticket.sign_off}}</td>
+                {% else %}
+                <!-- <td>{{ ticket.sign_off }}</td> -->
+                <td class="not-signed-off">{{ticket.sign_off}}</td>
+                {% endif%}
             </tr>
             <tr>
                 <th>Code Review</th>
                 <td>{{ ticket.code_review }}</td>
             </tr>
+            <tr>
+                <th>Date created</th>
+                <td>{{ ticket.date_created }}</td>
+            </tr>
+            <tr>
+                <th>Last modified</th>
+                <td>{{ ticket.last_modified }}</td>
+            </tr>
+            <tr>
+                <th>Time passed since last update</th>
+                <td>{{ idle_time }}</td>
+            </tr>
         </tbody>
     </table>
 
+    <a href="{% url 'ticket_home' %}" class="btn btn-primary btn_back" > Back</a>
 </main>
 
 {% endblock %}

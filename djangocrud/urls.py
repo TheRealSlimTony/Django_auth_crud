@@ -61,6 +61,5 @@ urlpatterns = [
     path("ticket/home/", tikectviews.home, name="ticket_home"),
     path("ticket/create/", tikectviews.create, name="ticket_create"),
     path("ticket/detail/<int:ticket_id>/", tikectviews.detail, name="ticket_detail"),
-    path("ticket/idk/", tikectviews.idk, name="ticket_idk"),
-
+    
 ]
