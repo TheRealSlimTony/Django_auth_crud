@@ -58,8 +58,8 @@ urlpatterns = [
     path("chat/home/read_qr/", chatviews.read_qr, name="read_qr"),
     path("send/", chatviews.send, name="send"),
     path("getMessages/<str:room>/", chatviews.get_messages, name="get_messages"),
-    path("ticket/home/", tikectviews.home, name="ticket_home"),
-    path("ticket/create/", tikectviews.create, name="ticket_create"),
-    path("ticket/detail/<int:ticket_id>/", tikectviews.detail, name="ticket_detail"),
+    # path("ticket/home/", tikectviews.home, name="ticket_home"),
+    # path("ticket/create/", tikectviews.create, name="ticket_create"),
+    # path("ticket/detail/<int:ticket_id>/", tikectviews.detail, name="ticket_detail"),
     
 ]
