@@ -4,13 +4,13 @@ import os
 
 import httpx
 import requests
-import requests as ri
 from asgiref.sync import sync_to_async
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
@@ -125,11 +125,15 @@ def signin(request):
                 return redirect('home')
 
 def snippets(request):
-    
+
     if request.method == 'POST':
         print(request.POST['ID_search'])
         ID_search = request.POST['ID_search']
-        snippets = Snippet.objects.filter(language=ID_search)
+        if ID_search.isnumeric():
+           
+            snippets = Snippet.objects.filter(Q(title__icontains=ID_search) | Q(id=int(ID_search)))
+        else:
+            snippets = Snippet.objects.filter(Q(title__icontains=ID_search))
         return render(request, 'snippets.html', {
         'tasks': snippets
     })

@@ -15,3 +15,6 @@ class Ticket(models.Model):
         return "{} - {} - {} - {} - {}".format(
             self.id, self.user, self.sign_off, self.code_review, self.date_created
         )
+    
+
+    
