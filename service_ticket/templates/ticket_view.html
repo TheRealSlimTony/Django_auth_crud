@@ -51,7 +51,8 @@
     .search-form input[type="submit"]:hover {
         background-color: #0069d9;
     }
-        .btn_create{
+
+    .btn_create {
         float: right;
         /* width: 100%; */
         max-width: 70px;
@@ -68,16 +69,13 @@
     </div>
     {% endif %}
 
-
-
-
     <h1>Service Ticket </h1>
     <form class="search-form" action="" method="POST">
         {% csrf_token %}
         <input type="text" name="ID_search" placeholder="Search...">
         <input type="submit" value="Search">
     </form>
-    <a href="{% url 'ticket_create' %}" class="btn btn-primary btn_create" > Create</a>
+    <a href="{% url 'ticket_create' %}" class="btn btn-primary btn_create"> Create</a>
 
     <table>
         <thead>

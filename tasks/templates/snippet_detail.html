@@ -3,21 +3,57 @@
 {% block content %}
 
 <style>
-    .code-box {
-      background-color: #f5f5f5;
-      border: 1px solid #ddd;
-      padding: 10px;
-    }
+  .code-box {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .btn_create {
+    float: right;
+    /* Optional: Add any additional styling for the button */
+    color: green;
+    background-color: transparent;
+  }
+
+  .btn-back {
+    margin-top: 20px;
+  }
 </style>
 
 <main class="container py-5">
-    <h1>{{ snippet.title }}</h1>
-    <!-- <p>ID: {{ snippet.id }}</p> -->
-    <p>Code: {{ snippet.language }}</p>
+  <h1>{{ snippet.title }}</h1>
+  <p>Code: {{ snippet.language }}</p>
+  <button onclick="copyToClipboard()" class="btn btn-primary btn_create">&#x1F4CB;</button>
+  <div class="code-box">
+    <pre id="codeSnippet">{{ snippet.descripcion }}</pre>
+  </div>
+  <!-- <button class="btn btn-primary btn-back">Back;</button>
+   -->
+  <a href="{% url 'snippets' %}" class="btn btn-primary btn-back"> Back</a>
+</main>
 
-    <div class="code-box">
-        <pre>{{ snippet.descripcion }}</pre>
-    </div>
-</main> 
+<script>
+  function copyToClipboard() {
+    /* Get the text from the code snippet */
+    const codeSnippet = document.getElementById('codeSnippet');
+    const text = codeSnippet.innerText;
+
+    /* Create a temporary textarea element */
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = text;
+    document.body.appendChild(tempTextarea);
+
+    /* Copy the text from the textarea */
+    tempTextarea.select();
+    document.execCommand('copy');
+
+    /* Remove the temporary textarea */
+    document.body.removeChild(tempTextarea);
+
+    /* Display a success message or perform any other actions */
+    // alert('Code snippet copied to clipboard!');
+  }
+</script>
 
 {% endblock %}
