@@ -1,62 +1,88 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
-{%block content%}
+{% block content %}
 
 <main class="container py-5">
 
-    <h2>Select a Card</h2>
-    {{session_id}}
-    <button onclick="showTags()">Show votes</button>
-    <h1 id="my-tag" style="display:none;">Score: {{score}}</h1>
-    <ul>
-        {%for participant in participants%}
-            {%if participant.voted%}
-                <li>{{participant}} &#10004;&#65039; 
-                    <span id="tag-{{participant.id}}" style="display: none;">{{participant.point}}</span>
-                </li>
-            {%else%}
-            <li>{{participant}}&#9203;</li>
-            {%endif%}
-        {%endfor%}
-    </ul>
-  
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" name="card" value="0">
-        <input type="submit" name="card" value="1">
-        <input type="submit" name="card" value="2">
-        <input type="submit" name="card" value="3">
-        <input type="submit" name="card" value="5">
-        <input type="submit" name="card" value="8">
-        <input type="submit" name="card" value="13">
-        <input type="submit" name="card" value="∞">
-        <input type="submit" name="card" value="?">
-        <input type="submit" name="card" value="Clear">
-        <input type="hidden" name="user_id" value="{{ user_id}}">
-        <input type="hidden" name="session_id" value="{{ session_id }}">
-    </form>
+  <h2>Select a Card</h2>
+  {{ session_id }}
+  <button id="show-votes-btn">Show votes</button>
+  <h1 id="my-tag" style="display: none;">Score: <span id="score-value">{{ score }}</span></h1>
+  <ul id="participants-list">
+    {% for participant in participants %}
+    {% if participant.voted %}
+    <li>{{ participant }} &#10004;&#65039;
+      <span id="tag-{{ participant.id }}" style="display: none;">{{ participant.point }}</span>
+    </li>
+    {% else %}
+    <li>{{ participant }}&#9203;</li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <form id="card-form" method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="card" value="0">
+    <input type="submit" name="card" value="1">
+    <input type="submit" name="card" value="2">
+    <input type="submit" name="card" value="3">
+    <input type="submit" name="card" value="5">
+    <input type="submit" name="card" value="8">
+    <input type="submit" name="card" value="13">
+    <!-- <input type="submit" name="card" value="∞"> -->
+    <!-- <input type="submit" name="card" value="?"> -->
+    <input type="submit" name="card" value="Clear">
+    <input type="hidden" name="user_id" value="{{ user_id }}">
+    <input type="hidden" name="session_id" value="{{ session_id }}">
+  </form>
 
 </main>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function showTags() {
-  var tags = document.querySelectorAll("[id^='tag-']");
-  for (var i = 0; i < tags.length; i++) {
-    if (tags[i].style.display === "none") {
-      tags[i].style.display = "inline";
-    } else {
-      tags[i].style.display = "none";
-    }
+  $(document).ready(function () {
+    $('#card-form').submit(function () {
+      // Form submission will proceed normally
+    });
+
+    $('#show-votes-btn').click(function () {
+      toggleVotes();
+    });
+
+    // Refresh the specific content every second
+    setInterval(refreshContent, 6000);
+  });
+
+  function toggleVotes() {
+    var tags = $('[id^=tag-]');
+    tags.toggle();
+    $('#my-tag').toggle();
   }
-  var tag = document.getElementById("my-tag");
-    if (tag.style.display === "none") {
-        tag.style.display = "block";
-      } else {
-        tag.style.display = "none";
+
+  function refreshContent() {
+    $.ajax({
+      type: 'GET',
+      url: window.location.href,
+      success: function (data) {
+        // print(data)
+        updateContent(data);
+      },
+      error: function (xhr, status, error) {
+        // Handle error response
+        // ...
       }
-    
+    });
+  }
+
+  function updateContent(data) {
+    var updatedContent = $(data).find('#participants-list, #my-tag');
+    $('#participants-list').html(updatedContent.filter('#participants-list').html());
+    $('#my-tag').html(updatedContent.filter('#my-tag').html());
+
+    var newScore = data.score;  // Retrieve the updated score from the response data
+    $('#score-value').text(newScore);
 }
 </script>
 
-{%endblock%}
+{% endblock %}
