@@ -18,9 +18,9 @@ def home(request):
         text = request.POST["text"]
         print(request_to_do, text)
 
-        # analized_info = analize_info(request_to_do,text)
+        analized_info = analize_info(request_to_do, text)
 
-    return render(request, "home_chatgpt.html", {"analized_info": "analized_info"})
+    return render(request, "home_chatgpt.html", {"analized_info": analized_info})
 
 
 def read_img(request):
