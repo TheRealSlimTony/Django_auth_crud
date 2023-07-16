@@ -1,0 +1,33 @@
+{%extends 'base.html'%} {%block content%}
+
+<style>
+  .code-box {
+    background-color: #53ddf43d;
+    border: 1px solid #3337d88a;
+    padding: 10px;
+    border-radius: 3px;
+  }
+</style>
+
+<main class="container py-5">
+  <h1>TEXT IMG TO STRING</h1>
+  <p>
+    Here you can upload an image that has text, and converted into a string
+    legible for any digital process
+  </p>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="qr-code">Upload image you want to analize: </label>
+    <input type="file" name="qr-code" />
+    <button type="submit">Upload</button>
+  </form>
+
+  <div class="code-box">
+    <pre id="codeSnippet">{{txt_img}}</pre>
+  </div>
+
+  <h1>Sumarized text</h1>
+  <p>{{analized_info}}</p>
+</main>
+{%endblock%}

@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tasks import views
-from pointing_poker import views as pointerviews
+
 from chat import views as chatviews
+from chatgpt_module import views as chatgptviews
+from pointing_poker import views as pointerviews
 from service_ticket import views as tikectviews
+from tasks import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,7 +31,9 @@ urlpatterns = [
     path("logout/", views.signout, name="logout"),
     path("snippet/", views.snippet, name="snippet"),
     path("snippets/", views.snippets, name="snippets"),
-    path("snippet_detail/<int:snippet_id>/",views.snippet_detail,name='snippet_detail'),
+    path(
+        "snippet_detail/<int:snippet_id>/", views.snippet_detail, name="snippet_detail"
+    ),
     path("tasks/create/", views.create_task, name="create_task"),
     path("tasks/<int:task_id>/", views.task_detail, name="task_detail"),
     path("tasks/<int:task_id>/completed", views.complete_task, name="complete_task"),
@@ -61,6 +65,6 @@ urlpatterns = [
     path("ticket/home/", tikectviews.home, name="ticket_home"),
     path("ticket/create/", tikectviews.create, name="ticket_create"),
     path("ticket/detail/<int:ticket_id>/", tikectviews.detail, name="ticket_detail"),
-   
-
+    path("chatgpt/home/", chatgptviews.home, name="home_gpt"),
+    path("chatgpt/read_img/", chatgptviews.read_img, name="gpt_read_img"),
 ]
