@@ -30,13 +30,13 @@ def read_img(request):
         qr_file = request.FILES["qr-code"]
         image = Image.open(qr_file)
         text = pytesseract.image_to_string(image)
-        analized_info = analize_info("sumarized the following text", text)
-        print(text, analized_info)
+        # analized_info = analize_info("sumarized the following text", text)
+        # print(text, analized_info)
 
         return render(
             request,
             "upload_img_text.html",
-            {"txt_img": text, "analized_info": analized_info},
+            {"txt_img": text, "analized_info": "analized_info"},
         )
 
     return render(request, "upload_img_text.html")
