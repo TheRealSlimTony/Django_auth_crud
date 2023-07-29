@@ -2,18 +2,9 @@
 
 {%block content%}
 
-
-<main
-  style="background-image: url('/static/img/bg_og.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
   <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
 
     <H1 class="display-1 text-center">TOPIC</H1>
-    <!-- <p>Welcome to TOPIC - a website designed for job seekers and recruiters alike. On TOPIC, you can find a range of
-      useful tools and resources to help you succeed in your job search or hiring process. From resume builders and
-      interview tips, to job board aggregators and salary comparison tools, TOPIC has something for everyone. Whether
-      you're a seasoned professional looking for your next big career move, or an employer seeking top talent for your
-      organization, TOPIC has the features you need to make informed decisions and achieve your goals.</p> -->
-      <p>
         TOPIC is not just a platform but an invaluable playground and portfolio that empowers me to unleash my creativity and share my ideas and projects with the world. It serves as a blank canvas where I can bring my visions to life and express myself in a meaningful way.
         
         Within the realm of TOPIC, I have the freedom to explore diverse concepts and experiment with various mediums. Whether I'm developing a new software application, designing a stunning visual masterpiece, crafting compelling written content, or even pursuing a unique combination of disciplines, TOPIC welcomes and supports my creative endeavors.
@@ -27,7 +18,7 @@
       <a class="btn btn-primary" href="/signup/">Signup</a>
     </div>
 
-  </section>
+ 
 
   <div class="row w-100 d-none d-lg-flex">
     <div class="col-lg-6 my-4">
@@ -47,23 +38,27 @@
     </div
   </div>
 
-  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
-    <div>
-      <h5>Random Fact</h5>
+
+    <div class="py-1">
+      <h5>API Random Fact</h5>
       <p>{{fact}}</p>
     </div>
+
+    {% if ip_info %}
+      <div class="py-1">
+        <h5>We know your IP address & location </h5>
+        <p>IP: {{ip_info}}</p>
+        <p>Exact location: {{latitud}}, {{longitud}}</p>
+        <p> but dont worry we will not tell anyone...</p>
+      </div>
+    {% else %}
+      <div style="display: none;">
+        This div is hidden because ip_info is not provided or empty.
+      </div>
+    {% endif %} 
   </section>
 
-  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
-    <div>
-      <h5>We know your IP address & location </h5>
-      <p>IP: {{ip_info}}</p>
-      <p>Exact location: {{latitud}}, {{longitud}}</p>
-      <p> but dont worry we will not tell anyone...</p>
-    </div>
-  </section>
 
 
-</main>
 
 {%endblock%}

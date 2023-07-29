@@ -14,11 +14,15 @@ def home(request):
 
     else:
         print(request.POST)
-        request_to_do = request.POST["request_to_do"]
-        text = request.POST["text"]
-        print(request_to_do, text)
+        context = request.POST["context"]
+        instruction = request.POST["instruction"]
+        input_v = request.POST["input"]
+        output_v = request.POST["output"]
+        request_to_do = context + instruction + input_v + output_v
 
-        analized_info = analize_info(request_to_do, text)
+        print(request_to_do)
+
+        analized_info = analize_info(request_to_do)
 
         return render(request, "home_chatgpt.html", {"analized_info": analized_info})
 
@@ -42,15 +46,14 @@ def read_img(request):
     return render(request, "upload_img_text.html")
 
 
-def analize_info(prompt, text=None):
+def analize_info(prompt):
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
-                "content": "give all response in json format :{} {} ".format(
-                    prompt, text
-                ),
+                # "content": "give all response in json format :{} ".format(prompt),
+                "content": "{} ".format(prompt),
             }
         ],
     )
