@@ -15,7 +15,6 @@
       crossorigin="anonymous"
     ></script>
   </head>
-
   <body>
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -39,6 +38,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'home_chat' %}">Chat</a>
             </li>
+          </li>
             <li class="nav-item">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,7 +75,6 @@
                     </ul>
                 </li>
             </li>
-
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'ticket_home' %}">SNOW</a>
@@ -95,6 +94,23 @@
                     </ul>
                 </li>
             </li>
+                        <li class="nav-item">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      AI Tools
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'home_gpt'%}">ChatGPT</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'gpt_read_img'%}">Read Image</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'encrypt'%}">Encrypt</a>
+                        </li>
+                  </ul>
+              </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">logout</a>
             </li>

@@ -1,0 +1,37 @@
+{%extends 'base.html'%} {%block content%}
+<style>
+  .code-box {
+    background-color: #53ddf43d;
+    border: 1px solid #3337d88a;
+    padding: 10px;
+    border-radius: 3px;
+    overflow: auto; /* Add scrollbars when content overflows */
+    max-height: 600px; /* Adjust the max height as needed */
+  }
+</style>
+<main class="container py-5">
+  <h1>Encrypt your text</h1>
+
+  <form action="{% url 'encrypt'%}" method="POST">
+    {% csrf_token %}
+    <div>
+      <textarea
+        name="text_to_encrypt"
+        cols="173"
+        rows="10"
+        placeholder="Place here the text that you want to encrypt"
+      ></textarea>
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      style="margin-top: 15px; margin-bottom: 15px"
+    >
+      Send
+    </button>
+    <div class="code-box">{{encryption_key}}</div>
+    <div class="code-box">{{encrypted_text}}</div>
+  </form>
+</main>
+
+{%endblock%}

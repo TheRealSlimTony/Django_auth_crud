@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <style>
   .code-box {
@@ -25,7 +23,9 @@
 <main class="container py-5">
   <h1>{{ snippet.title }}</h1>
   <p>Code: {{ snippet.language }}</p>
-  <button onclick="copyToClipboard()" class="btn btn-primary btn_create">&#x1F4CB;</button>
+  <button onclick="copyToClipboard()" class="btn btn-primary btn_create">
+    &#x1F4CB;
+  </button>
   <div class="code-box">
     <pre id="codeSnippet">{{ snippet.descripcion }}</pre>
   </div>
@@ -37,17 +37,17 @@
 <script>
   function copyToClipboard() {
     /* Get the text from the code snippet */
-    const codeSnippet = document.getElementById('codeSnippet');
+    const codeSnippet = document.getElementById("codeSnippet");
     const text = codeSnippet.innerText;
 
     /* Create a temporary textarea element */
-    const tempTextarea = document.createElement('textarea');
+    const tempTextarea = document.createElement("textarea");
     tempTextarea.value = text;
     document.body.appendChild(tempTextarea);
 
     /* Copy the text from the textarea */
     tempTextarea.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
 
     /* Remove the temporary textarea */
     document.body.removeChild(tempTextarea);

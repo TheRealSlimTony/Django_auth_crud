@@ -1,0 +1,85 @@
+{%extends 'base.html'%} {%block content%}
+<style>
+  .code-box {
+    background-color: #53ddf43d;
+    border: 1px solid #3337d88a;
+    padding: 10px;
+    border-radius: 3px;
+    overflow: auto; /* Add scrollbars when content overflows */
+    max-height: 600px; /* Adjust the max height as needed */
+  }
+  .btn-primary {
+    --darkreader-text--bs-btn-color: #e8e6e3;
+    --darkreader-bg--bs-btn-bg: #0250c43a;
+    --darkreader-border--bs-btn-border-color: #0147ae;
+    --darkreader-text--bs-btn-hover-color: #e8e6e3;
+    --darkreader-bg--bs-btn-hover-bg: #094bac;
+    --darkreader-border--bs-btn-hover-border-color: #094fb6;
+    --darkreader-bg--bs-btn-focus-shadow-rgb: 2, 72, 174;
+    --darkreader-text--bs-btn-active-color: #e8e6e3;
+    --darkreader-bg--bs-btn-active-bg: #0846a2;
+    --darkreader-border--bs-btn-active-border-color: #0a51b9;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --darkreader-text--bs-btn-disabled-color: #e8e6e3;
+    --darkreader-bg--bs-btn-disabled-bg: #0250c4;
+    --darkreader-border--bs-btn-disabled-border-color: #0147ae;
+  }
+</style>
+<main class="container py-5">
+  <h1>Decrypt your text</h1>
+
+  <form action="{% url 'decrypt'%}" method="POST">
+    {% csrf_token %}
+    <div>
+      <textarea
+        name="text_to_decrypt"
+        cols="173"
+        rows="10"
+        placeholder="Place here the text that you want to decrypt"
+      ></textarea>
+    </div>
+    <h3>key</h3>
+    <div>
+      <textarea
+        name="key"
+        cols="173"
+        rows="1"
+        placeholder="Place here the text that you want to decrypt"
+      ></textarea>
+    </div>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      style="margin-top: 15px; margin-bottom: 15px"
+    >
+      Send
+    </button>
+    <h3>Encrypted text</h3>
+    <div class="code-box">{{decrypted_text}}</div>
+  </form>
+</main>
+
+<script>
+  function copyToClipboard() {
+    /* Get the text from the code snippet */
+    const codeSnippet = document.getElementById("key");
+    const text = codeSnippet.innerText;
+
+    /* Create a temporary textarea element */
+    const tempTextarea = document.createElement("textarea");
+    tempTextarea.value = text;
+    document.body.appendChild(tempTextarea);
+
+    /* Copy the text from the textarea */
+    tempTextarea.select();
+    document.execCommand("copy");
+
+    /* Remove the temporary textarea */
+    document.body.removeChild(tempTextarea);
+
+    /* Display a success message or perform any other actions */
+    // alert('Code snippet copied to clipboard!');
+  }
+</script>
+
+{%endblock%}

@@ -4,7 +4,8 @@ import qrcode
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from PIL import Image
-import cv2
+
+# import cv2
 import numpy as np
 
 
@@ -123,13 +124,14 @@ def qr_creation(qr_code_requested):
 
 
 def read_qr(request):
-    if request.method == "POST":
-        qr_file = request.FILES["qr-code"]
-        img = cv2.imdecode(np.fromstring(qr_file.read(), np.uint8), cv2.IMREAD_COLOR)
-        detector = cv2.QRCodeDetector()
-        data, bbox, _ = detector.detectAndDecode(img)
-        print(data)
+    # if request.method == "POST":
+    #     # qr_file = request.FILES["qr-code"]
+    #     # img = cv2.imdecode(np.fromstring(qr_file.read(), np.uint8), cv2.IMREAD_COLOR)
+    #     # detector = cv2.QRCodeDetector()
+    #     # data, bbox, _ = detector.detectAndDecode(img)
+    #     print(data)
 
-        return render(request, "read_qr.html", {"qr_decoded": data})
+    #     return render(request, "read_qr.html", {"qr_decoded": data})
 
-    return render(request, "read_qr.html")
+    # return render(request, "read_qr.html")
+    print("disable at the moment")

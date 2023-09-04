@@ -67,4 +67,7 @@ urlpatterns = [
     path("ticket/detail/<int:ticket_id>/", tikectviews.detail, name="ticket_detail"),
     path("chatgpt/home/", chatgptviews.home, name="home_gpt"),
     path("chatgpt/read_img/", chatgptviews.read_img, name="gpt_read_img"),
+    path("chatgpt/encrypt/", chatgptviews.encrypt_text_view, name="encrypt"),
+    path("chatgpt/decrypt/", chatgptviews.decrypt_text_view, name="decrypt"),
+    path("chatgpt/pdf_chat/", chatgptviews.chat_pdf, name="chat_pdf"),
 ]
