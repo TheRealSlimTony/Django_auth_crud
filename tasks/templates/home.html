@@ -1,68 +1,78 @@
-{%extends 'base.html'%}
-
-{%block content%}
-
+{% extends 'base.html' %} {% block content %}
 
 <main
-  style="background-image: url('/static/img/bg_og.gif'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; width: 100vw;">
-  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
-
-    <H1 class="display-1 text-center">TOPIC</H1>
-    <!-- <p>Welcome to TOPIC - a website designed for job seekers and recruiters alike. On TOPIC, you can find a range of
-      useful tools and resources to help you succeed in your job search or hiring process. From resume builders and
-      interview tips, to job board aggregators and salary comparison tools, TOPIC has something for everyone. Whether
-      you're a seasoned professional looking for your next big career move, or an employer seeking top talent for your
-      organization, TOPIC has the features you need to make informed decisions and achieve your goals.</p> -->
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ab tenetur recusandae adipisci ex nihil quos quas minima! In cum expedita nesciunt dolorum voluptas unde. Dolores id totam inventore vitae reiciendis eos non expedita dolorum obcaecati laudantium, modi deserunt quam? Officia ex ea totam assumenda magni soluta inventore excepturi ipsam, fugiat error, at velit corrupti dolorum eaque voluptatem! Beatae assumenda numquam, commodi amet quaerat maiores aperiam neque ipsum voluptatum, saepe iste veritatis distinctio non rerum alias quia possimus pariatur, ipsam voluptates at expedita. Consequatur eos pariatur optio! Illum quae ducimus debitis dicta animi odio! Ratione alias quisquam error reprehenderit. Ab, recusandae nam dolorum enim, commodi ullam voluptas nulla pariatur totam sint qui a cumque facere rerum, eligendi perferendis. Ipsum, voluptates quam soluta ab, repellendus officiis quae nesciunt sit consectetur numquam totam iusto blanditiis voluptatibus. Sunt obcaecati iure facere quas, quaerat blanditiis molestiae fuga, omnis quia perspiciatis cupiditate, repellat deleniti quam consectetur quibusdam ut mollitia numquam velit. Id reprehenderit placeat fuga quae eveniet culpa soluta illum consectetur, odit obcaecati dolore a, dignissimos ratione eligendi, vitae repudiandae dolores sit ipsam earum enim. Ratione officia vel odio voluptates nam reiciendis, enim unde mollitia numquam obcaecati, temporibus architecto suscipit quia ipsam velit incidunt asperiores assumenda adipisci cupiditate maxime! Eius modi reiciendis quia facilis, recusandae illo neque hic minus sed iste quasi tempora a delectus deleniti. Odit repellendus dicta veniam labore officiis quibusdam quam, dolores non, assumenda ea suscipit saepe. Ab, quo officia nulla illo necessitatibus rerum culpa quibusdam neque error tenetur cum at id dolorem ducimus reprehenderit alias expedita nobis facere maxime odit iste ratione vero. Neque asperiores est possimus minima, eveniet animi voluptatum blanditiis, illo nostrum veniam nobis id sequi quaerat delectus ducimus saepe aliquid laboriosam totam repellat quae sint iure! Dignissimos nulla non, nihil deserunt architecto sed magni laboriosam voluptate hic alias beatae magnam, velit et asperiores illo veniam? Non nulla impedit aspernatur beatae eos! Corporis sunt, similique temporibus ea quibusdam a, itaque nemo, enim omnis provident dolor necessitatibus dignissimos libero aliquid dolore cumque magnam exercitationem alias placeat porro illum voluptatibus voluptatum animi odio. Dolor dolores ipsam possimus enim quibusdam cupiditate, deleniti temporibus reiciendis, aspernatur eligendi dicta repudiandae natus facilis quo consectetur, officiis nostrum earum. Blanditiis, laborum quidem illo repellendus consequatur asperiores totam non. Officia, rem unde error enim impedit maxime voluptatum voluptas facere veritatis tempora iste nisi delectus quos rerum, placeat repellat inventore maiores quis fugit sit provident eius. Consequuntur, maiores?</p>
-
+  style="
+    background-image: url('/static/img/bg_og.giff');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+  "
+>
+  <section
+    class="card card-body"
+    style="background-color: rgba(255, 255, 255, 0.3)"
+  >
+    <h1 class="display-1 text-center">Welcome</h1>
 
     <div class="text-center">
-      <a class="btn btn-primary" href="/signin/">Signin</a>
-      <a class="btn btn-primary" href="/signup/">Signup</a>
-    </div>
+      <a
+        href="/signin/"
+        style="
+          background-color: transparent;
+          border: 2px solid #fff;
+          color: #fff;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+        "
+        onmouseover="this.style.backgroundColor='#fff'; this.style.color='#000';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#fff';"
+        >Signin</a
+      >
 
+      <a
+        href="/signup/"
+        style="
+          background-color: transparent;
+          border: 2px solid #fff;
+          color: #fff;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+        "
+        onmouseover="this.style.backgroundColor='#fff'; this.style.color='#000';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#fff';"
+        kkkk
+        >Signup</a
+      >
+    </div>
   </section>
 
-  <div class="row w-100 d-none d-lg-flex">
-    <div class="col-lg-6 my-4">
-      <iframe src="https://www.google.com/maps/embed/v1/place?q={{latitud}},{{longitud}}&key={{google_api_key}}"
-      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-    </div>
-    <div class="col-lg-6 my-4 d-flex align-items-center" style="background-color: rgba(255, 255, 255, 0.3);">
-      <div>
-        <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quidem saepe voluptates vitae, nemo consequatur
-          ipsam voluptate harum laboriosam. Quos!</h6>
-        <p>Im just adding space with lorem over here, please ignore this!</p>
-        <p>This useful feature helps to make your embedded map responsive (<strong>mobile
-            friendly</strong>). You can customize responsive behavior with the use of <a
-            href="https://mdbootstrap.com/docs/standard/layout/breakpoints/">breakpoints</a>.</p>
-        <p>This text looks so nice because it's <strong>vertically centered</strong> you can achieve
-          this effect using the <a href="https://mdbootstrap.com/docs/standard/layout/vertical-alignment/">vertical
-            alignment</a> layout option.</p>
-        <p style="color: black; font-size: inherit;">This is a black paragraph with the base font size.</p>
-      </div>
-    </div
-  </div>
-
-  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
+  <section
+    class="card card-body"
+    style="background-color: rgba(255, 255, 255, 0.3)"
+  >
     <div>
       <h5>Random Fact</h5>
-      <p>{{fact}}</p>
+      <p>{{ fact }}</p>
     </div>
   </section>
 
-  <section class="card card-body" style="background-color: rgba(255, 255, 255, 0.3);">
+  <section
+    class="card card-body"
+    style="background-color: rgba(255, 255, 255, 0.3)"
+  >
     <div>
-      <h5>We know your IP address & location </h5>
-      <p>IP: {{ip_info}}</p>
-      <p>Exact location: {{latitud}}, {{longitud}}</p>
-      <p> but dont worry we will not tell anyone...</p>
+      <h5>We know your IP address & location</h5>
+      <p>IP: {{ ip_info }}</p>
+      <p>Exact location: {{ latitud }}, {{ longitud }}</p>
+      <p>but don't worry we will not tell anyone...</p>
     </div>
   </section>
-
-
 </main>
 
-{%endblock%}
+{% endblock %}
