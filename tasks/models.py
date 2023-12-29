@@ -21,6 +21,10 @@ class Snippet(models.Model):
     descripcion = models.TextField(blank=True)
     language = models.CharField(max_length=50, default="Python")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    chat_gpt_explanation = models.TextField(blank=True)
+    public_snippet = models.BooleanField(default=False)
 
     def __str__(self):
-         return "{} - {} - {} - {}".format(self.id, self.title, self.user, self.language)
+        return "{} - {} - {} - {} - {}".format(
+            self.id, self.title, self.user, self.language, self.public_snippet
+        )

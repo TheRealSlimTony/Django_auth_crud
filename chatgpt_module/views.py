@@ -1,14 +1,15 @@
 import base64
 import os
-import openai
+from openai import OpenAI
 import pytesseract
 from cryptography.fernet import Fernet
 from django.shortcuts import get_object_or_404, render
 from PIL import Image
+import requests
 
 
 def home(request):
-    openai.api_key = os.environ.get("chatgpt")
+    OPENAI_API_KEY = os.environ.get("chatgpt")
 
     if request.method == "GET":
         return render(request, "home_chatgpt.html", {"analized_info": ""})
@@ -33,7 +34,7 @@ def chat_pdf(request):
 
 
 def read_img(request):
-    openai.api_key = os.environ.get("chatgpt")
+    OPENAI_API_KEY = os.environ.get("chatgpt")
 
     if request.method == "POST":
         qr_file = request.FILES["qr-code"]
@@ -53,17 +54,39 @@ def read_img(request):
 
 
 def analize_info(prompt, text):
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+    api_key = os.environ.get("chatgpt")
+    # gets API Key from environment variable OPENAI_API_KEY
+    client = OpenAI()
+
+    # Non-streaming:
+    print("----- standard request -----")
+    completion = client.chat.completions.create(
+        model="gpt-4",
         messages=[
             {
                 "role": "user",
-                # "content": "give all response in json format :{} ".format(prompt),
-                "content": "{} {}".format(prompt, text),
-            }
+                "content": prompt,
+            },
         ],
     )
     return completion.choices[0].message.content
+    # Streaming:
+    # print("----- streaming request -----")
+    # stream = client.chat.completions.create(
+    #     model="gpt-4",
+    #     messages=[
+    #         {
+    #             "role": "user",
+    #             "content": prompt,
+    #         },
+    #     ],
+    #     stream=True,
+    # )
+    # for chunk in stream:
+    #     if not chunk.choices:
+    #         continue
+    #     print(chunk.choices[0].delta.content, end="")
+    # print()
 
 
 def encrypt_text_view(request):

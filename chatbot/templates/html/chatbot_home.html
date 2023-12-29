@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+
+<form method="POST">
+  {% csrf_token %}
+  <input name="QR_Request" id="QR" placeholder="What do you want to QR?" />
+  <input type="submit" value="Create" name="Send" />
+</form>
+
+{% endblock %}

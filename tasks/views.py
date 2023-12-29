@@ -3,6 +3,7 @@ import json
 import os
 
 import httpx
+from openai import OpenAI
 import requests
 import requests as ri
 from asgiref.sync import sync_to_async
@@ -13,6 +14,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.db.models import Q
 
 from .forms import TaskForm
 from .models import Snippet, Task
@@ -155,7 +157,7 @@ def snippets(request):
         snippets = Snippet.objects.filter(language=ID_search)
         return render(request, "snippets.html", {"tasks": snippets})
 
-    snippets = Snippet.objects.all()
+    snippets = Snippet.objects.filter(Q(public_snippet=True) | Q(user=request.user))
 
     return render(request, "snippets.html", {"tasks": snippets})
 
@@ -249,8 +251,19 @@ def snippet(request):
             tag = request.POST["tag"]
             snippet = request.POST["snippet"]
             print(title, tag, snippet, request.user)
+            publicado = request.POST.get("public_private_toggle", "private")
+            get_chat_gpt_description = chat_gpt_add_description(snippet)
+            if publicado == "true":
+                publicado = True
+            else:
+                publicado = False
             snippet = Snippet(
-                title=title, language=tag, descripcion=snippet, user=request.user
+                title=title,
+                language=tag,
+                descripcion=snippet,
+                user=request.user,
+                chat_gpt_explanation=get_chat_gpt_description,
+                public_snippet=publicado,
             )
             snippet.save()
             return render(request, "snippet.html")
@@ -260,3 +273,23 @@ def snippet_detail(request, snippet_id):
     snippet = get_object_or_404(Snippet, id=snippet_id)
 
     return render(request, "snippet_detail.html", {"snippet": snippet})
+
+
+def chat_gpt_add_description(code):
+    api_key = os.environ.get("chatgpt")
+    # gets API Key from environment variable OPENAI_API_KEY
+    client = OpenAI()
+
+    # Non-streaming:
+    print("----- standard request -----")
+    completion = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {
+                "role": "user",
+                "content": "I need an explenation of the following code, only text need it: "
+                + code,
+            },
+        ],
+    )
+    return completion.choices[0].message.content

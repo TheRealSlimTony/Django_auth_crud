@@ -30,6 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="your secret key")
 other_key = os.environ.get("Other_key")
 facts_key = os.environ.get("facts_key")
 ip_key = os.environ.get("ip_key")
+
 engine = os.environ.get("engine")
 dbname = os.environ.get("dbname")
 user = os.environ.get("user")
@@ -37,13 +38,10 @@ password = os.environ.get("password")
 host = os.environ.get("host")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "RENDER" not in os.environ
+DEBUG = True
+CSRF_COOKIE_SECURE = True
+ALLOWED_HOSTS = ["*", "topic9.azurewebsites.net", "https://topic9.azurewebsites.net/"]
 
-
-ALLOWED_HOSTS = ["*"]
-RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -59,6 +57,7 @@ INSTALLED_APPS = [
     "chat",
     # "service_ticket",
     "chatgpt_module",
+    "chatbot",
 ]
 
 MIDDLEWARE = [
@@ -179,6 +178,3 @@ LOGIN_URL = "/signin/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-DEBUG = True

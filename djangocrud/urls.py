@@ -21,6 +21,7 @@ from chatgpt_module import views as chatgptviews
 from pointing_poker import views as pointerviews
 from service_ticket import views as tikectviews
 from tasks import views
+from chatbot import views as chatbotviews
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -58,4 +59,5 @@ urlpatterns = [
     path("chatgpt/encrypt/", chatgptviews.encrypt_text_view, name="encrypt"),
     path("chatgpt/decrypt/", chatgptviews.decrypt_text_view, name="decrypt"),
     path("chatgpt/pdf_chat/", chatgptviews.chat_pdf, name="chat_pdf"),
+    path("chatbot/home/", chatbotviews.home, name="chatbot_home"),
 ]

@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Django",
+      "type": "python",
+      "request": "launch",
+      "program": "C:/Users/Its Tony Again PC/Documents/GitHub/Django_auth_crud/manage.py",
+      "args": ["runserver", "--noreload"],
+      "django": true
+    }
+  ]
+}
