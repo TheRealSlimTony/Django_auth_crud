@@ -1,43 +1,42 @@
-# Django auth crud
-Descripción
-Django auth crud es una solución de software integral desarrollada en Django, orientada a mejorar la comunicación y la eficiencia en entornos de trabajo colaborativos. Esta poderosa aplicación no solo facilita la interacción en tiempo real y la gestión de tareas, sino que también integra tecnologías avanzadas como el reconocimiento óptico de caracteres (OCR) y el acceso al API de ChatGPT de OpenAI. Las características clave incluyen un sistema de chat en tiempo real, gestión de tickets de servicio, administración de tareas, almacenamiento y compartición de snippets de código, y un módulo OCR avanzado. Además, cuenta con un sistema de autenticación robusto para asegurar la privacidad y seguridad de los usuarios.
+# Django Auth CRUD
+Description
+Django auth crud is a comprehensive software solution developed in Django, aimed at improving communication and efficiency in collaborative work environments. This powerful application not only facilitates real-time interaction and task management but also integrates advanced technologies such as Optical Character Recognition (OCR) and access to OpenAI's ChatGPT API. Key features include a real-time chat system, service ticket management, task administration, storage and sharing of code snippets, and an advanced OCR module. Additionally, it features a robust authentication system to ensure user privacy and security.
 
-# Características
-- Chatroom en Tiempo Real: Comunicación instantánea para equipos, facilitando la colaboración y el intercambio de ideas.
-- Gestión de Tickets de Servicio: Sistema eficiente para reportar, rastrear y resolver incidencias o solicitudes.
-- Administración de Tareas: Herramientas para la creación, asignación y seguimiento de tareas, optimizando la gestión del trabajo.
-- Snippets de Código: Espacio para compartir y almacenar fragmentos de código, mejorando la reutilización de recursos.
-- Lectura OCR: Capacidad para extraer texto de imágenes y documentos escaneados, aumentando la accesibilidad y la eficiencia.
-- Integración con ChatGPT: Acceso al API de ChatGPT para realizar consultas inteligentes y obtener respuestas en tiempo real.
-- Autenticación Segura: Protege la información y el acceso a la aplicación mediante un sistema de autenticación robusto.
+# Features
+- Real-Time Chatroom: Instant communication for teams, facilitating collaboration and idea sharing.
+- Service Ticket Management: Efficient system for reporting, tracking, and resolving issues or requests.
+- Task Administration: Tools for creating, assigning, and tracking tasks, optimizing work management.
+- Code Snippets: Space to share and store code fragments, improving resource reuse.
+- OCR Reading: Ability to extract text from images and scanned documents, increasing accessibility and efficiency.
+- ChatGPT Integration: Access to the ChatGPT API for intelligent queries and real-time answers.
+- Secure Authentication: Protects information and application access through a robust authentication system.
 
-# Tecnologías Utilizadas
+# Technologies Used
 
--Django
-- WebSocket (para chat en tiempo real)
-- PostgreSQL (para base de datos)
-- Librerías de OCR como Tesseract o similares
+- Django
+- WebSocket (for real-time chat)
+- PostgreSQL (for database)
+- OCR libraries like Tesseract or similar
 
-## Configuración e Instalación
-Instrucciones para configurar y desplegar la aplicación.
+## Configuration and Installation
+Instructions for configuring and deploying the application.
 
-# Prerrequisitos
+# Prerequisites
 - Python 3.11
 - Django 3.x
-- Tesseract OCR 
+- Tesseract OCR
 - apt-get install libgl1-mesa-glx
 - apt-get install libglib2.0-dev
 - apt-get install tesseract-ocr
-- 
-# Instalación
+
+# Installation
 
 - pip install -r requirements.txt
 - python manage.py migrate
 - python manage.py runserver
 
-# Contribuir
-Información para desarrolladores interesados en contribuir al proyecto.
+# Contribute
+Information for developers interested in contributing to the project.
 
-# Contacto
-Información de contacto para soporte o consultas.
-
+# Contact
+Contact information for support or inquiries.
